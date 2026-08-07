@@ -26,7 +26,7 @@ class Generator:
         """加载训练好的检查点，恢复模型与配置"""
         ckpt_path = os.path.join(self.run_config.out_dir, 'ckpt.pt')
         self.logger.info(f"Loading checkpoint from {ckpt_path}")
-        checkpoint = torch.load(ckpt_path, map_location=self.device)
+        checkpoint = torch.load(ckpt_path, map_location=self.device, weights_only=False)
 
         self.model_config = checkpoint['model_config']
         self.model = GPT(self.model_config)
