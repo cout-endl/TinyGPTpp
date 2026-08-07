@@ -38,7 +38,7 @@ class TrainConfig:
     min_lr: float = 6e-5
 
     # 梯度累积
-    gradient_accumulation_steps: int = 1
+    gradient_accumulation_steps: int = 5 * 8
 
     # ========== 后续Phase扩展字段，默认关闭 ==========
     use_amp: bool = False

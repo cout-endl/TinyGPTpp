@@ -41,7 +41,7 @@ def main():
     # 评估与梯度累积
     parser.add_argument('--eval_interval', type=int, default=2000)
     parser.add_argument('--eval_iters', type=int, default=200)
-    parser.add_argument('--gradient_accumulation_steps', type=int, default=1)
+    parser.add_argument('--gradient_accumulation_steps', type=int, default=5 * 8)
 
     # 运行参数
     parser.add_argument('--dataset', type=str, default='shakespeare_char')
