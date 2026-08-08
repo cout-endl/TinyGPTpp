@@ -54,20 +54,23 @@ class Generator:
             self.logger.info("Using GPT-2 BPE encoder (tiktoken)")
 
     def generate(self, start: str = "\n", num_samples: int = 10,
-                 max_new_tokens: int = 500, temperature: float = 1.0,
-                 top_k: int | None = None):
-        """批量生成文本，与原版逻辑完全一致"""
+                max_new_tokens: int = 500, temperature: float = 1.0,
+                top_k: int | None = None, top_p: float | None = None):
+        """批量生成文本，支持 temperature、top_k、top_p"""
         start_ids = self.encode(start)
         x = torch.tensor(start_ids, dtype=torch.long, device=self.device)[None, ...]
 
         self.logger.info(
             f"Generating {num_samples} samples | max_new_tokens={max_new_tokens} | "
-            f"temperature={temperature} | top_k={top_k}"
+            f"temperature={temperature} | top_k={top_k} | top_p={top_p}"
         )
 
         with torch.no_grad():
             for k in range(num_samples):
-                y = self.model.generate(x, max_new_tokens, temperature=temperature, top_k=top_k)
+                y = self.model.generate(x, max_new_tokens,
+                                        temperature=temperature,
+                                        top_k=top_k,
+                                        top_p=top_p)
                 print(self.decode(y[0].tolist()))
                 print('-' * 50)
 

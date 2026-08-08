@@ -12,6 +12,7 @@ def main():
     parser.add_argument('--max_new_tokens', type=int, default=500)
     parser.add_argument('--temperature', type=float, default=1.0)
     parser.add_argument('--top_k', type=int, default=None)
+    parser.add_argument('--top_p', type=float, default=None, help='核采样概率阈值')
     parser.add_argument('--device', type=str, default='cuda')
     parser.add_argument('--seed', type=int, default=1337)
     parser.add_argument('--dataset', type=str, default='shakespeare_char')
@@ -29,7 +30,8 @@ def main():
         num_samples=args.num_samples,
         max_new_tokens=args.max_new_tokens,
         temperature=args.temperature,
-        top_k=args.top_k
+        top_k=args.top_k,
+        top_p=args.top_p
     )
 
 
